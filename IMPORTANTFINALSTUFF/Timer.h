@@ -26,7 +26,6 @@ public:
 private:
 	static float Last;
 	static float m_DeltaTime;
-
 };
 
 // initialize the static variables

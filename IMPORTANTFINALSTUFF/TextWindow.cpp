@@ -40,6 +40,16 @@ void TextWindow::RenderSprite(Sprite & a_Sprite)
 
 	WriteConsoleOutputA(m_Buffers[(int)!m_CurrentBuffer], a_Sprite.GetBuffer(), a_Sprite.GetSize(), Vec2(0, 0), &temp);
 }
+void TextWindow::RenderSprite(PixelSprite & a_Sprite)
+{
+	SMALL_RECT temp;
+	temp.Bottom = a_Sprite.GetPosition().Y + a_Sprite.GetSize().Y;
+	temp.Left = a_Sprite.GetPosition().X;
+	temp.Right = a_Sprite.GetPosition().X + a_Sprite.GetSize().X;
+	temp.Top = a_Sprite.GetPosition().Y;
+
+	WriteConsoleOutputA(m_Buffers[(int)!m_CurrentBuffer], a_Sprite.GetBuffer(), a_Sprite.GetSize(), Vec2(0, 0), &temp);
+}
 
 void TextWindow::ClearBackBuffer()
 {
@@ -50,11 +60,6 @@ void TextWindow::ClearBackBuffer()
 
 /*
 TO DO LIST:
-
-Input for movement
-
-Add to body for every fruit eaten
-
 
 
 */

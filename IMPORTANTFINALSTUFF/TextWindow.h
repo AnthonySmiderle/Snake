@@ -7,7 +7,7 @@ public:
 	void Reize(unsigned int a_width, unsigned int a_height);
 	void SwapBackBuffer();
 	void RenderSprite(Sprite &a_Sprite);
-
+	void RenderSprite(PixelSprite &a_Sprite);
 
 private:
 	void ClearBackBuffer();

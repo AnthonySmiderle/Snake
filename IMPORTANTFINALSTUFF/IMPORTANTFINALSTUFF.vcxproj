@@ -115,13 +115,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Events.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Snake.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextWindow.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="TextWindow.cpp" />
     <ClCompile Include="MAINM.cpp" />
+    <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>

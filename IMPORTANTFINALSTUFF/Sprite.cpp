@@ -64,9 +64,9 @@ PixelSprite::PixelSprite(const unsigned int a_width, const unsigned int a_height
 	SetSprite(l_Temp, a_width, a_height);
 	
 	CHAR_INFO *ptr = GetBuffer();
-	for (unsigned int i = 0; i < a_width * a_height; i++) {
+	for (unsigned int i = 0; i < a_width * a_height; i++)
+	{
 		ptr[i].Attributes = a_Colour;
-
 	}
 	// delete our buffer
 	delete[] l_Temp;
@@ -89,12 +89,12 @@ void AnimatedSprite::SetAnimationRate(float a_Time)
 
 Sprite AnimatedSprite::GetAnimation()
 {
-	if (m_Current > m_RateOfAnimation + m_RateOfAnimation) {
+	if (m_Current > m_RateOfAnimation + m_RateOfAnimation)
+	{
 		m_CurrentAnimation = 1;
 		if (m_CurrentAnimation > m_AnimatedBuffer.size())
 			m_CurrentAnimation = 0;
 	}
-
 	return m_AnimatedBuffer[m_CurrentAnimation];
 }
 
