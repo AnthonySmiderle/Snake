@@ -2,9 +2,9 @@
 #include "Timer.h"
 #include "Snake.h"
 
-int main() 
+int main()
 {
-	TextWindow tw(1000, 600);
+	TextWindow tw(800, 600);
 	//char buffer[] = { 'l','k','m','o' };
 	//Sprite mySprite(buffer, 2, 2);
 	//tw.RenderSprite(mySprite);
@@ -23,19 +23,31 @@ int main()
 
 	std::vector<PixelSprite*> snakeVisuals;
 
+	snakeVisuals.push_back(new PixelSprite(2, 1, 6));
 	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
 	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
 	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
 	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
+	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
+	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
+
 
 
 	Snek Snake(snakeVisuals);
+
+	//for (int i = 0; i < Snake.getBody().size(); i++) {
+	//
+	//	Snake.getBody(i)->SetPosition(Snake.getBody(i)->GetPosition().X + Snake.getBody(i)->GetSize()., Snake.getBody(i)->GetPosition().Y );
+	//
+	//}
+
 
 	while (true)
 	{
 
 		Sleep(20);
 		//Snake.getBody(0)->SetPosition(Snake.getBody(0)->GetPosition().X + 1.0, Snake.getBody(0)->GetPosition().Y);
+		COORD lastPosition = Snake.getBody(0)->GetPosition();
 		if (isEvent(Events::W))
 		{
 			Snake.getDirection('U');
@@ -61,16 +73,19 @@ int main()
 		Snake.getDir();
 		Timer::CalculateDeltaTime();
 		tw.RenderSprite(*Snake.getBody(0));
-		for (int i = 1; i < Snake.getBody().size(); i++){
+		for (int i = Snake.getBody().size() - 1; i >= 0; i--) {
 
-			Snake.getBody(i)->SetPosition(Snake.getLastPositionX(), Snake.getLastPositionY());
+			if(i == 0)
+				Snake.getBody(i)->SetPosition(Snake.getBody(i)->GetPosition().X, Snake.getBody(i)->GetPosition().Y);
+			else
+			Snake.getBody(i)->SetPosition(Snake.getBody(i - 1)->GetPosition().X , Snake.getBody(i - 1)->GetPosition().Y);
 			tw.RenderSprite(*Snake.getBody(i));
-	}
+		}
 		//	Fruits[0]->SetPosition(500, 10);
 			//tw.RenderSprite(Snake.getBody(0));
 			//tw.RenderSprite(fruit);
-			tw.SwapBackBuffer();
-			float check = Timer::GetDeltaTime();
+		tw.SwapBackBuffer();
+		float check = Timer::GetDeltaTime();
 
 	}
 
@@ -97,21 +112,21 @@ int main()
 
 /*
 
-						TO DO LIST:						
+						TO DO LIST:
 ________________________________________________________
 			 \/
 Start screen /\
 					 /
 Input for movement \/
-		 			\/
-Boundaries for Snek /\ 
+					\/
+Boundaries for Snek /\
 							   \/
 Spawn fruit randomly on screen /\
 								  \/
 Add to body for every fruit eaten /\
 															  \/
 Collision w/ walls and own tail results in instntaneous DEATH /\
-                 \/ 
+				 \/
 Game over screen /\
 
 */

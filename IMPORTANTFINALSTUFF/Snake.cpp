@@ -22,32 +22,32 @@ PixelSprite * Snek::getBody(int e)
 
 void Snek::moveUP()
 {
-	this->lastPositionX = this->body[0]->GetPosition().X;
-	this->lastPositionY = this->body[0]->GetPosition().Y - this->body[0]->GetSize().Y - 1;
-
-	this->body[0]->SetPosition(this->body[0]->GetPosition().X, this->body[0]->GetPosition().Y - 1);
+	this->lastPositionX = this->head->GetPosition().X;
+	this->lastPositionY = this->head->GetPosition().Y - this->head->GetSize().Y - 1;
+	
+	this->head->SetPosition(this->head->GetPosition().X, this->head->GetPosition().Y - 1);
 
 }
 
 void Snek::moveDOWN()
 {
-	this->lastPositionX = this->body[0]->GetPosition().X;
-	this->lastPositionY = this->body[0]->GetPosition().Y + this->body[0]->GetSize().Y + 1;
-	this->body[0]->SetPosition(this->body[0]->GetPosition().X, this->body[0]->GetPosition().Y + 1);
+	this->lastPositionX = this->head->GetPosition().X;
+	this->lastPositionY = this->head->GetPosition().Y + this->head->GetSize().Y + 1;
+	this->head->SetPosition(this->head->GetPosition().X, this->head->GetPosition().Y + 1);
 }
 
 void Snek::moveLEFT()
 {
-	this->lastPositionX = this->body[0]->GetPosition().X - this->body[0]->GetSize().X - 1;
-	this->lastPositionY = this->body[0]->GetPosition().Y;
-	this->body[0]->SetPosition(this->body[0]->GetPosition().X - 1, this->body[0]->GetPosition().Y);
+	this->lastPositionX = this->head->GetPosition().X - this->head->GetSize().X - 1;
+	this->lastPositionY = this->head->GetPosition().Y;
+	this->head->SetPosition(this->head->GetPosition().X - 1, this->head->GetPosition().Y);
 }
 
 void Snek::moveRIGHT()
 {
-	this->lastPositionX = this->body[0]->GetPosition().X + this->body[0]->GetSize().X + 1;
-	this->lastPositionY = this->body[0]->GetPosition().Y;
-	this->body[0]->SetPosition(this->body[0]->GetPosition().X + 1, this->body[0]->GetPosition().Y);
+	this->lastPositionX = this->head->GetPosition().X + this->head->GetSize().X + 1;
+	this->lastPositionY = this->head->GetPosition().Y;
+	this->head->SetPosition(this->head->GetPosition().X + 1, this->head->GetPosition().Y);
 }
 
 
