@@ -18,9 +18,7 @@ public:
 	void moveDOWN();
 	void moveLEFT();
 	void moveRIGHT();
-	void follow();
-	int getLastPositionX();
-	int getLastPositionY();
+
 
 
 	bool getDirection(char DIR);

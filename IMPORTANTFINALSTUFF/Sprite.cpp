@@ -76,29 +76,29 @@ PixelSprite::PixelSprite(const PixelSprite & a_Sprite)
 {
 	
 }
-
-void AnimatedSprite::SetAnimationRate(const unsigned int a_Time)
-{
-	m_RateOfAnimation = (float)a_Time / 1000.0f;
-}
-
-void AnimatedSprite::SetAnimationRate(float a_Time)
-{
-	m_RateOfAnimation = a_Time;
-}
-
-Sprite AnimatedSprite::GetAnimation()
-{
-	if (m_Current > m_RateOfAnimation + m_RateOfAnimation)
-	{
-		m_CurrentAnimation = 1;
-		if (m_CurrentAnimation > m_AnimatedBuffer.size())
-			m_CurrentAnimation = 0;
-	}
-	return m_AnimatedBuffer[m_CurrentAnimation];
-}
-
-void AnimatedSprite::AddSprite(PixelSprite a_Sprite)
-{
-	m_AnimatedBuffer.push_back(a_Sprite);
-}
+//
+//void AnimatedSprite::SetAnimationRate(const unsigned int a_Time)
+//{
+//	m_RateOfAnimation = (float)a_Time / 1000.0f;
+//}
+//
+//void AnimatedSprite::SetAnimationRate(float a_Time)
+//{
+//	m_RateOfAnimation = a_Time;
+//}
+//
+//Sprite AnimatedSprite::GetAnimation()
+//{
+//	if (m_Current > m_RateOfAnimation + m_RateOfAnimation)
+//	{
+//		m_CurrentAnimation = 1;
+//		if (m_CurrentAnimation > m_AnimatedBuffer.size())
+//			m_CurrentAnimation = 0;
+//	}
+//	return m_AnimatedBuffer[m_CurrentAnimation];
+//}
+//
+//void AnimatedSprite::AddSprite(PixelSprite a_Sprite)
+//{
+//	m_AnimatedBuffer.push_back(a_Sprite);
+//}

@@ -2,9 +2,26 @@
 #include "Timer.h"
 #include "Snake.h"
 
+#define FRAMERATE 25.0f
+
+void capFrameRate(float frameRate) {
+
+	static clock_t frameClocker = clock();
+
+	while ((CLOCKS_PER_SEC / frameRate) > (clock() - frameClocker));
+
+	frameClocker = clock();
+}
+
+
+
 int main()
 {
+
+
 	TextWindow tw(800, 600);
+
+
 	//char buffer[] = { 'l','k','m','o' };
 	//Sprite mySprite(buffer, 2, 2);
 	//tw.RenderSprite(mySprite);
@@ -23,7 +40,7 @@ int main()
 
 	std::vector<PixelSprite*> snakeVisuals;
 
-	snakeVisuals.push_back(new PixelSprite(2, 1, 6));
+	snakeVisuals.push_back(new PixelSprite(2, 1, 7));
 	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
 	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
 	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
@@ -44,8 +61,8 @@ int main()
 
 	while (true)
 	{
+		capFrameRate(FRAMERATE);
 
-		Sleep(20);
 		//Snake.getBody(0)->SetPosition(Snake.getBody(0)->GetPosition().X + 1.0, Snake.getBody(0)->GetPosition().Y);
 		COORD lastPosition = Snake.getBody(0)->GetPosition();
 		if (isEvent(Events::W))
@@ -70,16 +87,16 @@ int main()
 
 
 
-		Snake.getDir();
+		//Snake.getDir();
 		Timer::CalculateDeltaTime();
 		tw.RenderSprite(*Snake.getBody(0));
 		for (int i = Snake.getBody().size() - 1; i >= 0; i--) {
 
-			if(i == 0)
+			tw.RenderSprite(*Snake.getBody(i));
+			if (i == 0)
 				Snake.getBody(i)->SetPosition(Snake.getBody(i)->GetPosition().X, Snake.getBody(i)->GetPosition().Y);
 			else
-			Snake.getBody(i)->SetPosition(Snake.getBody(i - 1)->GetPosition().X , Snake.getBody(i - 1)->GetPosition().Y);
-			tw.RenderSprite(*Snake.getBody(i));
+				Snake.getBody(i)->SetPosition(Snake.getBody(i - 1)->GetPosition().X, Snake.getBody(i - 1)->GetPosition().Y);
 		}
 		//	Fruits[0]->SetPosition(500, 10);
 			//tw.RenderSprite(Snake.getBody(0));

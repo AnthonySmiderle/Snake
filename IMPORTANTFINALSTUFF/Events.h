@@ -1,7 +1,7 @@
 #pragma once
-namespace Events {
-	enum : unsigned char {
-		Mouse_Left = 0x01,
+namespace Events {//namespace used for key events
+	enum : unsigned char {//enums used for a given key code on this list
+		Mouse_Left = 0x01,//hexidecimal representation of an integer, used for key input
 		Mouse_Right = 0x02,
 		Backspace = 0x08,
 		Tab = 0x09,

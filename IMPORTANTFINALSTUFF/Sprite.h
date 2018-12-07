@@ -38,18 +38,18 @@ private:
 
 };
 
-class AnimatedSprite {
-public:
-
-	//time must be in miliseconds
-	void SetAnimationRate(const unsigned int a_Time);
-	void SetAnimationRate(float a_Time);
-	Sprite GetAnimation();
-	void AddSprite(PixelSprite a_Sprite);
-private:
-	std::vector<PixelSprite> m_AnimatedBuffer;
-	float m_Last;
-	float m_Current;
-	float m_RateOfAnimation;
-	unsigned int m_CurrentAnimation = 0;
-};
+//class AnimatedSprite {
+//public:
+//
+//	//time must be in miliseconds
+//	void SetAnimationRate(const unsigned int a_Time);
+//	void SetAnimationRate(float a_Time);
+//	Sprite GetAnimation();
+//	void AddSprite(PixelSprite a_Sprite);
+//private:
+//	std::vector<PixelSprite> m_AnimatedBuffer;
+//	float m_Last;
+//	float m_Current;
+//	float m_RateOfAnimation;
+//	unsigned int m_CurrentAnimation = 0;
+//};
