@@ -20,7 +20,7 @@ public:
 	void moveRIGHT();
 
 
-
+	void grow();
 	bool getDirection(char DIR);
 	bool isDoingAHeck();
 	bool isNomFroot();

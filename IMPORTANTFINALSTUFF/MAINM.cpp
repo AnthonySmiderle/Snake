@@ -2,15 +2,17 @@
 #include "Timer.h"
 #include "Snake.h"
 
-#define FRAMERATE 25.0f
+#define FRAMERATE 30.0f
 
 void capFrameRate(float frameRate) {
 
-	static clock_t frameClocker = clock();
+	static long frameClocker = clock();//sets the frame clocker to the current system clock
 
-	while ((CLOCKS_PER_SEC / frameRate) > (clock() - frameClocker));
+	while ((CLOCKS_PER_SEC / frameRate) > (clock() - frameClocker));//while the clocks per sec over the frame rate is
+																	//greater than the current clock time minus the last clock time, stall the program
+																	//this is done so that the program will slow down until the desired frame rate is reached
 
-	frameClocker = clock();
+	frameClocker = clock();//sets the frame clocker to the newest system time
 }
 
 
@@ -21,22 +23,9 @@ int main()
 
 	TextWindow tw(800, 600);
 
-
-	//char buffer[] = { 'l','k','m','o' };
-	//Sprite mySprite(buffer, 2, 2);
-	//tw.RenderSprite(mySprite);
-	//AnimatedSprite aps;
-	//aps.AddSprite(PixelSprite(20, 20, 5));
-	//aps.AddSprite(PixelSprite(20, 20, 6));
-	//char Buffer[2] = { 'l','a' };
-	//	PixelSprite sp(1, 1, 2);
 	tw.SwapBackBuffer();
 
-	bool eatFruit = false;
-
-	PixelSprite fruit(1, 1, 3);
-
-	std::vector<PixelSprite*> Fruits;
+	
 
 	std::vector<PixelSprite*> snakeVisuals;
 
@@ -47,6 +36,7 @@ int main()
 	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
 	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
 	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
+
 
 
 
@@ -63,6 +53,7 @@ int main()
 	{
 		capFrameRate(FRAMERATE);
 
+		Snake.grow();
 		//Snake.getBody(0)->SetPosition(Snake.getBody(0)->GetPosition().X + 1.0, Snake.getBody(0)->GetPosition().Y);
 		COORD lastPosition = Snake.getBody(0)->GetPosition();
 		if (isEvent(Events::W))
@@ -87,7 +78,7 @@ int main()
 
 
 
-		//Snake.getDir();
+		Snake.getDir();
 		Timer::CalculateDeltaTime();
 		tw.RenderSprite(*Snake.getBody(0));
 		for (int i = Snake.getBody().size() - 1; i >= 0; i--) {
@@ -98,32 +89,14 @@ int main()
 			else
 				Snake.getBody(i)->SetPosition(Snake.getBody(i - 1)->GetPosition().X, Snake.getBody(i - 1)->GetPosition().Y);
 		}
-		//	Fruits[0]->SetPosition(500, 10);
-			//tw.RenderSprite(Snake.getBody(0));
-			//tw.RenderSprite(fruit);
+		
+
 		tw.SwapBackBuffer();
 		float check = Timer::GetDeltaTime();
 
 	}
 
-	////if(eat fruit)
-	//Snake.push_back(new PixelSprite(1, 1, 7));
-	//Snake.push_back(new PixelSprite(1, 1, 7));
-	//Snake.push_back(new PixelSprite(1, 1, 7));
-	//
-	//Fruits.push_back(new PixelSprite(1, 1, 3));
-	//
-	//	while (true)
-	//	{
-	//		Sleep(40);
-	//		Snake[0]->SetPosition(Snake[0]->GetPosition().X + 1.0, Snake[0]->GetPosition().Y);
-	//		Timer::CalculateDeltaTime();
-	//		//tw.RenderSprite(aps.GetAnimation());
-	//		Fruits[0]->SetPosition(500, 10);
-	//		tw.RenderSprite(fruit);
-	//		tw.SwapBackBuffer();
-	//		float check = Timer::GetDeltaTime();
-	//	}
+	
 	return 0;
 }
 

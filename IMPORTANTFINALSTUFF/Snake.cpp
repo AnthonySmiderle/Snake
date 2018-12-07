@@ -45,6 +45,11 @@ void Snek::moveRIGHT()
 	this->head->SetPosition(this->head->GetPosition().X + this->head->GetSize().X, this->head->GetPosition().Y);
 }
 
+void Snek::grow()
+{
+	this->body.push_back(new PixelSprite(2, 1, 5));
+}
+
 //this function is used so that the snake continues in one direction when you press a key
 bool Snek::getDirection(char DIR)
 {
