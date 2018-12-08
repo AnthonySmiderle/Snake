@@ -121,6 +121,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextWindow.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Input.cpp" />
@@ -129,6 +130,7 @@
     <ClCompile Include="Snake.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
