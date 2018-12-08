@@ -81,11 +81,7 @@ int main()
 
 		for (int i = Snake.getBody().size() - 1; i > 0; i--)
 		{
-			//if (i == 0)
-			//	
-			//else
-			
-				Snake.getBody(i)->SetPosition(Snake.getBody(i - 1)->GetPosition().X, Snake.getBody(i - 1)->GetPosition().Y);
+			Snake.getBody(i)->SetPosition(Snake.getBody(i - 1)->GetPosition().X, Snake.getBody(i - 1)->GetPosition().Y);
 			
 			tw.RenderSprite(*Snake.getBody(i));
 		}
@@ -106,19 +102,6 @@ int main()
 
 		
 		}
-		//tw.RenderSprite(*Snake.getBody(0));
-
-		//check collision
-		//if (Snake.getBody(0)->GetPosition().X == 0 || Snake.getBody(0)->GetPosition().X == 800)
-		//{
-		//	tw.RenderSprite(*Snake.getBody(0), tw.makeVec2(400, 300));
-		//}
-		//
-		//if (Snake.getBody(0)->GetPosition().Y == 0 || Snake.getBody(0)->GetPosition().Y == 600)
-		//{
-		//	tw.RenderSprite(*Snake.getBody(0), tw.makeVec2(400, 300));
-		//}
-
 		tw.SwapBackBuffer();
 		float check = Timer::GetDeltaTime();
 	}
