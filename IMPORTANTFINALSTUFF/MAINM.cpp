@@ -4,6 +4,7 @@
 
 #define FRAMERATE 30.0f
 
+
 void capFrameRate(float frameRate) {
 
 	static long frameClocker = clock();//sets the frame clocker to the current system clock
@@ -21,40 +22,35 @@ int main()
 {
 
 
+
 	TextWindow tw(800, 600);
 
 	tw.SwapBackBuffer();
 
-	
 
-	std::vector<PixelSprite*> snakeVisuals;
+	std::vector<PixelSprite*> snakeVisuals(1, new PixelSprite(2, 1, 7));
 
-	snakeVisuals.push_back(new PixelSprite(2, 1, 7));
-	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
-	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
-	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
-	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
-	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
-	snakeVisuals.push_back(new PixelSprite(2, 1, 5));
+	for (int i = 0; i < 1; i++)
+		snakeVisuals.push_back(new PixelSprite(2, 1, 5));
 
 
 
 
 	Snek Snake(snakeVisuals);
-
 	//for (int i = 0; i < Snake.getBody().size(); i++) {
 	//
 	//	Snake.getBody(i)->SetPosition(Snake.getBody(i)->GetPosition().X + Snake.getBody(i)->GetSize()., Snake.getBody(i)->GetPosition().Y );
 	//
 	//}
 
-
+	Snake.getDirection('R');
 	while (true)
 	{
+
 		capFrameRate(FRAMERATE);
 
-		Snake.grow();
-		//Snake.getBody(0)->SetPosition(Snake.getBody(0)->GetPosition().X + 1.0, Snake.getBody(0)->GetPosition().Y);
+		//	Snake.grow();
+			//Snake.getBody(0)->SetPosition(Snake.getBody(0)->GetPosition().X + 1.0, Snake.getBody(0)->GetPosition().Y);
 		COORD lastPosition = Snake.getBody(0)->GetPosition();
 		if (isEvent(Events::W))
 		{
@@ -78,45 +74,53 @@ int main()
 
 
 
-		Snake.getDir();
+		//Snake.getDir();
 		Timer::CalculateDeltaTime();
-		tw.RenderSprite(*Snake.getBody(0));
-		for (int i = Snake.getBody().size() - 1; i >= 0; i--) {
+		//tw.RenderSprite(*Snake.getBody(0));
+				//Snake.getBody(0)->SetPosition(400, 300);
 
-			tw.RenderSprite(*Snake.getBody(i));
-			if (i == 0)
-				Snake.getBody(i)->SetPosition(Snake.getBody(i)->GetPosition().X, Snake.getBody(i)->GetPosition().Y);
-			else
+		for (int i = Snake.getBody().size() - 1; i > 0; i--)
+		{
+			//if (i == 0)
+			//	
+			//else
+			
 				Snake.getBody(i)->SetPosition(Snake.getBody(i - 1)->GetPosition().X, Snake.getBody(i - 1)->GetPosition().Y);
+			
+			tw.RenderSprite(*Snake.getBody(i));
 		}
+		Snake.getDir();
+		Snake.getBody(0)->SetPosition(Snake.getBody(0)->GetPosition().X, Snake.getBody(0)->GetPosition().Y);
+		tw.RenderSprite(*Snake.getBody(0));
+		for (int i = 1; i < Snake.getBody().size(); i++)
+		{
+			if (Snake.getBody(0)->GetPosition().X == Snake.getBody(i)->GetPosition().X && Snake.getBody(0)->GetPosition().Y == Snake.getBody(i)->GetPosition().Y)
+			{
+				Snake.getBody(0)->SetPosition(tw.getConsoleSizeInPixels().X / 2, tw.getConsoleSizeInPixels().Y / 2);
+			}
+			if (Snake.getBody(0)->GetPosition().X <= 0 || Snake.getBody(0)->GetPosition().X == tw.getConsoleSizeInPixels().X) 
+				Snake.getBody(0)->SetPosition(tw.getConsoleSizeInPixels().X / 2, tw.getConsoleSizeInPixels().Y / 2);
+
+			if (Snake.getBody(0)->GetPosition().Y <= 0 || Snake.getBody(0)->GetPosition().Y == tw.getConsoleSizeInPixels().Y) 
+				Snake.getBody(0)->SetPosition(tw.getConsoleSizeInPixels().X / 2, tw.getConsoleSizeInPixels().Y / 2);
+
 		
+		}
+		//tw.RenderSprite(*Snake.getBody(0));
+
+		//check collision
+		//if (Snake.getBody(0)->GetPosition().X == 0 || Snake.getBody(0)->GetPosition().X == 800)
+		//{
+		//	tw.RenderSprite(*Snake.getBody(0), tw.makeVec2(400, 300));
+		//}
+		//
+		//if (Snake.getBody(0)->GetPosition().Y == 0 || Snake.getBody(0)->GetPosition().Y == 600)
+		//{
+		//	tw.RenderSprite(*Snake.getBody(0), tw.makeVec2(400, 300));
+		//}
 
 		tw.SwapBackBuffer();
 		float check = Timer::GetDeltaTime();
-
 	}
-
-	
 	return 0;
 }
-
-/*
-
-						TO DO LIST:
-________________________________________________________
-			 \/
-Start screen /\
-					 /
-Input for movement \/
-					\/
-Boundaries for Snek /\
-							   \/
-Spawn fruit randomly on screen /\
-								  \/
-Add to body for every fruit eaten /\
-															  \/
-Collision w/ walls and own tail results in instntaneous DEATH /\
-				 \/
-Game over screen /\
-
-*/

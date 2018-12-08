@@ -1,8 +1,8 @@
 #include "TextWindow.h"
-struct Vec2 : public _COORD {
-	Vec2(unsigned int a_X, unsigned int a_Y){ X = a_X; Y = a_Y; }
-	Vec2() {}
-};
+//struct Vec2 : public _COORD {
+//	Vec2(unsigned int a_X, unsigned int a_Y){ X = a_X; Y = a_Y; }
+//	Vec2() {}
+//};
 
 TextWindow::TextWindow() {
 	m_Buffers[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
@@ -48,7 +48,28 @@ void TextWindow::RenderSprite(PixelSprite & a_Sprite)
 	temp.Right = a_Sprite.GetPosition().X + a_Sprite.GetSize().X;
 	temp.Top = a_Sprite.GetPosition().Y;
 
-	WriteConsoleOutputA(m_Buffers[(int)!m_CurrentBuffer], a_Sprite.GetBuffer(), a_Sprite.GetSize(), Vec2(0, 0), &temp);
+	WriteConsoleOutputA(m_Buffers[(int)!m_CurrentBuffer], a_Sprite.GetBuffer(), a_Sprite.GetSize(), Vec2(0,0), &temp);
+}
+//void TextWindow::RenderSprite(PixelSprite & a_Sprite, Vec2 pos)
+//{
+//	SMALL_RECT temp;
+//	temp.Bottom = a_Sprite.GetPosition().Y+ a_Sprite.GetSize().Y;
+//	temp.Left = a_Sprite.GetPosition().X;
+//	temp.Right = a_Sprite.GetPosition().X + a_Sprite.GetSize().X;
+//	temp.Top = a_Sprite.GetPosition().Y;
+//	COORD a;
+//	a.X = 10;
+//	a.Y = 10;
+//
+//	WriteConsoleOutputA(m_Buffers[(int)!m_CurrentBuffer], a_Sprite.GetBuffer(), a_Sprite.GetSize(), Vec2(0, 0), &temp);
+//}
+COORD TextWindow::getConsoleSizeInPixels()
+{
+	CONSOLE_SCREEN_BUFFER_INFO I;
+	GetConsoleScreenBufferInfo(m_Buffers[(int)!m_CurrentBuffer], &I);
+	
+	//subtracting left from right to get the width of the window, subtracting bottom from top to get the height
+	return COORD{ I.srWindow.Right - I.srWindow.Left, I.srWindow.Bottom - I.srWindow.Top };
 }
 
 void TextWindow::ClearBackBuffer()

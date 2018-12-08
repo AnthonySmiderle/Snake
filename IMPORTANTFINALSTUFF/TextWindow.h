@@ -1,6 +1,6 @@
 #pragma once
 #include "Sprite.h"
-class TextWindow {
+class TextWindow : public PixelSprite{
 public:
 	TextWindow();
 	TextWindow(unsigned int a_width, unsigned int a_height);
@@ -8,6 +8,14 @@ public:
 	void SwapBackBuffer();
 	void RenderSprite(Sprite &a_Sprite);
 	void RenderSprite(PixelSprite &a_Sprite);
+	void RenderSprite(PixelSprite &a_Sprite,Vec2 pos);
+
+	COORD getConsoleSizeInPixels();
+	
+	Vec2 makeVec2(int x, int y) {
+		static Vec2 v = Vec2(x, y);
+		return v;
+	}
 
 private:
 	void ClearBackBuffer();

@@ -1,7 +1,10 @@
 #pragma once
 #include <Windows.h>
 #include <vector>
-
+//struct Vec2 : public _COORD {
+//	Vec2(unsigned int a_X, unsigned int a_Y) { X = a_X; Y = a_Y; }
+//	Vec2() {}
+//};
 class Sprite {
 public:
 	Sprite();
@@ -13,14 +16,14 @@ public:
 	COORD GetPosition() const;
 	void SetPosition(const unsigned int a_X, const unsigned int a_Y);
 
-	void SetSize(COORD a) {
-		m_Position = Vec2(a.X, a.Y);
-	}
-private:
 	struct Vec2 : public _COORD {
 		Vec2(unsigned int a_X, unsigned int a_Y) { X = a_X; Y = a_Y; }
 		Vec2() {}
 	};
+	void SetSize(COORD a) {
+		m_Position = Vec2(a.X, a.Y);
+	}
+private:
 	//contains characters to write to screen
 	CHAR_INFO *m_Buffer;
 	//size of sprite width and height
@@ -34,6 +37,7 @@ class PixelSprite : public Sprite
 public:
 	PixelSprite(const unsigned int a_width, const unsigned int a_height, unsigned int a_Colour);
 	PixelSprite(const PixelSprite &a_Sprite);
+	PixelSprite() {}
 private:
 
 };
